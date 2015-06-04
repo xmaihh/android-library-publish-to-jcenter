@@ -70,7 +70,7 @@ allprojects {
 ```
 
 ####4. 配置项目信息
-下载[project.properties](https://github.com/xiaopansky/raw/master/project.properties)文件并放到你的library module目录下
+下载[project.properties](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/project.properties)文件并放到你的library module目录下
 
 project.properties文件的原始内容如下：
 ```properties
@@ -112,7 +112,7 @@ javadoc.name=Sketch
 你无需配置项目版本，会自动从你的build.gradle中获取版本名称作为项目版本
 
 ####5. 配置Bintray账号以及开发者信息
-下载[local.properties](https://github.com/xiaopansky/raw/master/local.properties)文件并放到你的library module目录下
+下载[local.properties](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/local.properties)文件并放到你的library module目录下
 
 local.properties文件的原始内容如下：
 ```properties
@@ -177,7 +177,7 @@ apply from: "https://raw.githubusercontent.com/xiaopansky/android-library-publis
 ```
 
 #####方法2：下载后使用本地bintrayUpload.gradle文件
-首先下载[bintrayUpload.gradle](https://github.com/xiaopansky/raw/master/bintrayUpload.gradle)文件并放到你的library module目录下，然后修改你的library module的build.gradle文件，在最后加上``apply from: "bintrayUpload.gradle"``，如下所示：
+首先下载[bintrayUpload.gradle](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/bintrayUpload.gradle)文件并放到你的library module目录下，然后修改你的library module的build.gradle文件，在最后加上``apply from: "bintrayUpload.gradle"``，如下所示：
 ```groovy
 apply plugin: 'com.android.library'
 
