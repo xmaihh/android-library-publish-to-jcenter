@@ -12,7 +12,7 @@ Bintray是jcenter的托管商，因此你必须注册一个Bintray账号，注�
 如图所示点击最右边箭头指示的复制按钮即可复制你的API Key
 
 ####2. 检查Android插件版本
-首先你要检查你的Android插件的版本，因为1.1.0版本有一个BUG会导致生成javadoc失败，所以你只需升级到最新即可。目前最新版本是1.2.3，在你的项目根目录下的build.gradle文件中修改版本号即可，如下:
+首先你要检查你的Android插件的版本，因为1.1.0版本有一个BUG会导致生成javadoc失败，所以你只需升级到最新即可。目前最新版本是1.2.3，在项目根目录下的build.gradle文件中修改版本号即可，如下:
 ```groovy
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -37,13 +37,14 @@ allprojects {
 如果你在看到这篇文章的时候有更新的版本的话，直接改为最新的版本即可。
 
 ####3. 添加所需插件
-在你的项目的根目录的build.gradle文件的dependencies中追加如下代码：
+在项目根目录下build.gradle文件中的dependencies节点中追加如下代码：
 ```groovy
 classpath 'com.github.dcendents:android-maven-plugin:1.2'
 classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
 ```
 android-maven-plugin插件是用来打包Maven所需文件的
-gradle-bintray-plugin插件是用来就生成的Maven所需文件上传到Bintray的
+
+gradle-bintray-plugin插件是用来将生成的Maven所需文件上传到Bintray的
 
 完成后如下所示：
 ```groovy
@@ -90,7 +91,7 @@ javadoc.name=
 >* project.name：项目名称
 >* project.groupId：项目组ID，通常情况下如果你的包名为com.example.test，那么项目组ID就是com.example
 >* project.artifactId：项目ID，通常情况下如果你的包名为com.example.test，那么项目ID就是test
->* project.packaging：包类型，一般的java是jar，那么Android库就是aar
+>* project.packaging：包类型，Android库是aar
 >* project.siteUrl：项目官方网站的地址，没有的话就用Github上的地址，例如：https://github.com/xiaopansky/Sketch
 >* project.gitUrl：项目的Git地址，例如：https://github.com/xiaopansky/Sketch.git
 >* javadoc.name：生成的javadoc打开后主页显示的名称，通常跟项目名称一样即可
@@ -146,6 +147,7 @@ developer.email=sky@xiaopan.me
 ```
 
 *号显示的为个人信息不反方便透露，还请见谅
+
 注意要将local.proerties文件加入忽略列表，以免被提交到Github或其他网站泄露个人信息
 
 ####6. 配置bintrayUpload.gradle
@@ -177,7 +179,9 @@ apply from: "https://raw.githubusercontent.com/xiaopansky/android-library-publis
 ```
 
 #####方法2：下载后使用本地bintrayUpload.gradle文件
-首先下载[bintrayUpload.gradle](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/bintrayUpload.gradle)文件并放到你的library module目录下，然后修改你的library module的build.gradle文件，在最后加上``apply from: "bintrayUpload.gradle"``，如下所示：
+首先下载[bintrayUpload.gradle](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/bintrayUpload.gradle)文件并放到你的library module目录下
+
+然后修改你的library module的build.gradle文件，在最后加上``apply from: "bintrayUpload.gradle"``，如下所示：
 ```groovy
 apply plugin: 'com.android.library'
 
@@ -203,7 +207,7 @@ android {
 apply from: "bintrayUpload.gradle"
 ```
 
-我当然推荐大家使用第一种方案，简单快捷，至此配置工作已全部结束
+推荐大家使用第一种方案，简单快捷，至此配置工作已全部结束
 
 ####7. 执行命令打包并上传到Bintray
 打开终端进入项目目录下，执行``gradlew bintrayUpload``命令即可
