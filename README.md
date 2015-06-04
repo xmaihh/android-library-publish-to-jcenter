@@ -1,6 +1,6 @@
-#android-library-publish-to-jcenter
+#5分钟发布Android Library项目到JCenter
 
-android-library-publish-to-jcenter是一个帮助Android开发者将AAR库发布到jcenter的项目
+android-library-publish-to-jcenter是一个帮助Android开发者将AAR库发布到jcenter的项目，android-library-publish-to-jcenter已经将需要写的脚本封装好了，我们只需要配置相关属性即可在5分钟之内发布我们的项目到JCenter（不包括审核时间哦）
 
 ####1. 注册Bintray账号 ([传送门](https://bintray.com))
 Bintray是jcenter的托管商，因此你必须注册一个Bintray账号，注册完账号后记下你的用户名以及API Key。
