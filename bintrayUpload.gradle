@@ -3,30 +3,32 @@ apply plugin: 'com.jfrog.bintray'
 
 // load properties
 Properties properties = new Properties()
-properties.load(project.file("local.properties").newDataInputStream())
-properties.load(project.file("project.properties").newDataInputStream())
-for(Map.Entry property in properties){
-    ext[property.key] = property.value
-    println(property.key+"="+property.value)
+File localPropertiesFile = project.file("local.properties");
+if(localPropertiesFile.exists()){
+    properties.load(localPropertiesFile.newDataInputStream())
+}
+File projectPropertiesFile = project.file("project.properties");
+if(projectPropertiesFile.exists()){
+    properties.load(projectPropertiesFile.newDataInputStream())
 }
 
 // read properties
-def projectName = property("project.name")
-def projectGroupId = property("project.groupId")
-def projectArtifactId = property("project.artifactId")
+def projectName = properties.getProperty("project.name")
+def projectGroupId = properties.getProperty("project.groupId")
+def projectArtifactId = properties.getProperty("project.artifactId")
 def projectVersionName = android.defaultConfig.versionName
-def projectPackaging = property("project.packaging")
-def projectSiteUrl = property("project.siteUrl")
-def projectGitUrl = property("project.gitUrl")
+def projectPackaging = properties.getProperty("project.packaging")
+def projectSiteUrl = properties.getProperty("project.siteUrl")
+def projectGitUrl = properties.getProperty("project.gitUrl")
 
-def developerId = property("developer.id")
-def developerName = property("developer.name")
-def developerEmail = property("developer.email")
+def developerId = properties.getProperty("developer.id")
+def developerName = properties.getProperty("developer.name")
+def developerEmail = properties.getProperty("developer.email")
 
-def bintrayUser = property("bintray.user")
-def bintrayApikey = property("bintray.apikey")
+def bintrayUser = properties.getProperty("bintray.user")
+def bintrayApikey = properties.getProperty("bintray.apikey")
 
-def javadocName = property("javadoc.name")
+def javadocName = properties.getProperty("javadoc.name")
 
 group = projectGroupId
 
