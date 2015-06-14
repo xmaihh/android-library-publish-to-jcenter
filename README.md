@@ -219,7 +219,7 @@ apply from: "bintrayUpload.gradle"
 
 登入Bintray网站，进入个人中心，在右侧的Owned Repositories区域点击Maven的图标，进入你的Maven项目列表。
 
-如果已经上传成功了，在这里就能看到你的项目，进入项目详情，在右下角的Linked To区域点击add in jcenter，然后在comment输入框里随便填写下信息，最后点send提交请求即可
+如果已经上传成功了，在这里就能看到你的项目，进入项目详情，在右下角的Linked To区域点击Add to JCenter，然后在Comments输入框里随便填写下信息，最后点Send提交请求即可
 
 一般情况下审核需要4到5个小时，耐心等待就行了，审核通过后会给你发邮件通知你，并且以后更新项目就不需要再审核了。
 
