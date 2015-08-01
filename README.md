@@ -12,7 +12,7 @@ Bintray是jcenter的托管商，因此你必须注册一个Bintray账号，注�
 如图所示点击最右边箭头指示的复制按钮即可复制你的API Key
 
 ####2. 检查Android插件版本
-首先你要检查你的Android插件的版本，因为1.1.0版本有一个BUG会导致生成javadoc失败，所以你只需升级到最新即可。目前最新版本是1.2.3，在项目根目录下的build.gradle文件中修改版本号即可，如下:
+首先你要检查你的Android插件的版本，因为1.1.0版本有一个BUG会导致生成javadoc失败，所以你只需升级到最新即可。目前最新版本是1.3.0，在项目根目录下的build.gradle文件中修改版本号即可，如下:
 ```groovy
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -21,7 +21,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.android.tools.build:gradle:1.3.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -39,7 +39,7 @@ allprojects {
 ####3. 添加所需插件
 在项目根目录下build.gradle文件中的dependencies节点中追加如下代码：
 ```groovy
-classpath 'com.github.dcendents:android-maven-plugin:1.2'
+classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
 classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
 ```
 android-maven-plugin插件是用来打包Maven所需文件的
@@ -55,8 +55,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+        classpath 'com.android.tools.build:gradle:1.3.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -246,3 +246,7 @@ compile 'me.xiaopan:sketch:2.0.0'
 >* [使用Gradle发布Android开源项目到JCenter](http://blog.csdn.net/maosidiaoxian/article/details/43148643)
 >* [使用Gradle发布项目到JCenter仓库](http://zhengxiaopeng.com/2015/02/02/使用Gradle发布项目到JCenter仓库/)
 >* [Android 项目打包到 JCenter 的坑](http://www.jianshu.com/p/c721f9297b2f?utm_campaign=hugo&utm_medium=reader_share&utm_content=note)
+
+####12. 常见问题
+>* `Error:Cause: org/gradle/api/publication/maven/internal/DefaultMavenFactory`：当你使用的Gradle版本是2.4以上，Android插件版本是1.3.0以上的时候就会出现这个问题，这时候你只需将android-maven-gradle-plugin插件版本改为**classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'**即可
+>* `You are using JDK version ‘java version “1.7.0_71”’. Some versions of JDK 1.7 (e.g. 1.7.0_10) may cause class loading errors in Gradle.Please update to a newer version (e.g. 1.7.0_67)`：当你使用的Gradle版本是2.4以上，Andriod插件版本是1.2.3的时候就会出现这个问题，同样的你只需要将android-maven-gradle-plugin插件版本改为**classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'**即可
