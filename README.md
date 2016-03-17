@@ -40,7 +40,7 @@ allprojects {
 在项目根目录下build.gradle文件中的dependencies节点中追加如下代码：
 ```groovy
 classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
-classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
 ```
 android-maven-gradle-plugin插件是用来打包Maven所需文件的
 
@@ -57,7 +57,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.3.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
