@@ -251,3 +251,6 @@ compile 'me.xiaopan:sketch:2.0.0'
 >* `Error:Cause: org/gradle/api/publication/maven/internal/DefaultMavenFactory`：当你使用的Gradle版本是2.4以上，Android插件版本是1.3.0以上的时候就会出现这个问题，这时候你只需将android-maven-gradle-plugin插件版本改为**classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'**即可
 >* `You are using JDK version ‘java version “1.7.0_71”’. Some versions of JDK 1.7 (e.g. 1.7.0_10) may cause class loading errors in Gradle.Please update to a newer version (e.g. 1.7.0_67)`：当你使用的Gradle版本是2.4以上，Andriod插件版本是1.2.3的时候就会出现这个问题，同样的你只需要将android-maven-gradle-plugin插件版本改为**classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'**即可
 >* `No value has been specified for property 'packageName'.`出这个问题肯定是看文档不仔细，把project.properties文件放在了项目根目录下，一定要放在mudule目录下才可以
+>* `Could not upload to 'https://*****.pom': HTTP/1.1 400 Bad Request [message:Unable to upload files: Maven group, artifact or version defined in the pom file do not match the file path '****.pom']`这个问题一般都是你的module的名字和你在project.properties
+配置的artifactId不一致导致的，改成一样的即可（感谢[Weizhou He
+ captainbupt](https://github.com/captainbupt)发现的这个问题）
