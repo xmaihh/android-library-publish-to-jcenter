@@ -11,8 +11,8 @@ Bintray是jcenter的托管商，因此你必须注册一个Bintray账号，注�
 
 如图所示点击最右边箭头指示的复制按钮即可复制你的API Key
 
-####2. 检查Android插件版本
-首先你要检查你的Android插件的版本，因为1.1.0版本有一个BUG会导致生成javadoc失败，所以你只需升级到最新即可。目前最新版本是1.3.0，在项目根目录下的build.gradle文件中修改版本号即可，如下:
+####2. 配置插件
+首先升级Android插件到最新版，然后添加maven插件bintray插件，完成后如下：
 ```groovy
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -21,41 +21,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.0'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
-
-```
-如果你在看到这篇文章的时候有更新的版本的话，直接改为最新的版本即可。
-
-####3. 添加所需插件
-在项目根目录下build.gradle文件中的dependencies节点中追加如下代码：
-```groovy
-classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
-```
-android-maven-gradle-plugin插件是用来打包Maven所需文件的
-
-gradle-bintray-plugin插件是用来将生成的Maven所需文件上传到Bintray的
-
-完成后如下所示：
-```groovy
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
         // NOTE: Do not place your application dependencies here; they belong
@@ -70,7 +36,10 @@ allprojects {
 }
 ```
 
-####4. 配置项目信息
+>* android-maven-gradle-plugin插件是用来打包Maven所需文件的
+>* gradle-bintray-plugin插件是用来将生成的Maven所需文件上传到Bintray的
+
+####3. 配置项目信息
 下载[project.properties](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/project.properties)文件并放到你的library module目录下
 
 project.properties文件的原始内容如下：
@@ -112,7 +81,7 @@ javadoc.name=Sketch
 
 你无需配置项目版本，会自动从你的build.gradle中获取版本名称作为项目版本
 
-####5. 配置Bintray账号以及开发者信息
+####4. 配置Bintray账号以及开发者信息
 下载[local.properties](https://github.com/xiaopansky/android-library-publish-to-jcenter/raw/master/local.properties)文件并放到你的library module目录下
 
 local.properties文件的原始内容如下：
@@ -150,7 +119,7 @@ developer.email=sky@xiaopan.me
 
 注意要将local.proerties文件加入忽略列表，以免被提交到Github或其他网站泄露个人信息
 
-####6. 配置bintrayUpload.gradle
+####5. 配置bintrayUpload.gradle
 #####方法1：直接使用远程bintrayUpload.gradle文件
 修改你的library module的build.gradle文件，在最后加上``apply from: "https://raw.githubusercontent.com/xiaopansky/android-library-publish-to-jcenter/master/bintrayUpload.gradle"``，如下所示：
 ```groovy
@@ -209,12 +178,12 @@ apply from: "bintrayUpload.gradle"
 
 推荐大家使用第一种方案，简单快捷，至此配置工作已全部结束
 
-####7. 执行命令打包并上传到Bintray
+####6. 执行命令打包并上传到Bintray
 打开终端进入项目目录下，执行``gradlew bintrayUpload``命令即可
 
 另外，如果你的本地已经配置了Gradle了，那么执行``gradle bintrayUpload``命令也可以。gradlew是Gradle的一层封装，如果你本地没有安装Gradle gradlew就会自动下载Gradle
 
-####8. 请求提交你的项目到jcenter
+####7. 请求提交你的项目到jcenter
 前面所有步骤走完之后实际上只是上传了你的项目到Bintray而已，并没有被包含在jcenter中，要想提交到jcenter中还需要Bintray的审核。
 
 登入Bintray网站，进入个人中心，在右侧的Owned Repositories区域点击Maven的图标，进入你的Maven项目列表。
@@ -223,13 +192,13 @@ apply from: "bintrayUpload.gradle"
 
 一般情况下审核需要4到5个小时，耐心等待就行了，审核通过后会给你发邮件通知你，并且以后更新项目就不需要再审核了。
 
-####9. 一句话导入你的项目
+####8. 一句话导入你的项目
 当审核通过后，别人就可以一句话导入你的项目了，例如：
 ```groovy
 compile 'me.xiaopan:sketch:2.0.0'
 ```
 
-####10. 额外补充：
+####9. 额外补充：
 #####保持你的library module的名字同artifactId一样
 因为在Bintray上你的项目的maven-metadata.xml文件的路径是``gruopId+"/"+module名称``。
 
@@ -241,13 +210,13 @@ compile 'me.xiaopan:sketch:2.0.0'
 
 目前为止我还没有找到更好的解决办法，就只能让module名称和artifactId保持一致，如果你们谁有更好的办法，欢迎留言交流。
 
-####11. 参考文章
+####10. 参考文章
 >* [Android拓展系列(12)--使用Gradle发布aar项目到JCenter仓库](http://www.cnblogs.com/qianxudetianxia/p/4322331.html)
 >* [使用Gradle发布Android开源项目到JCenter](http://blog.csdn.net/maosidiaoxian/article/details/43148643)
 >* [使用Gradle发布项目到JCenter仓库](http://zhengxiaopeng.com/2015/02/02/使用Gradle发布项目到JCenter仓库/)
 >* [Android 项目打包到 JCenter 的坑](http://www.jianshu.com/p/c721f9297b2f?utm_campaign=hugo&utm_medium=reader_share&utm_content=note)
 
-####12. 常见问题
+####11. 常见问题
 >* `Error:Cause: org/gradle/api/publication/maven/internal/DefaultMavenFactory`：当你使用的Gradle版本是2.4以上，Android插件版本是1.3.0以上的时候就会出现这个问题，这时候你只需将android-maven-gradle-plugin插件版本改为**classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'**即可
 >* `You are using JDK version ‘java version “1.7.0_71”’. Some versions of JDK 1.7 (e.g. 1.7.0_10) may cause class loading errors in Gradle.Please update to a newer version (e.g. 1.7.0_67)`：当你使用的Gradle版本是2.4以上，Andriod插件版本是1.2.3的时候就会出现这个问题，同样的你只需要将android-maven-gradle-plugin插件版本改为**classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'**即可
 >* `No value has been specified for property 'packageName'.`出这个问题肯定是看文档不仔细，把project.properties文件放在了项目根目录下，一定要放在mudule目录下才可以
