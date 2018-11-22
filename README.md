@@ -37,8 +37,8 @@ allprojects {
 }
 ```
 
->* android-maven-gradle-plugin 插件是用来打包 Maven 所需文件的
->* gradle-bintray-plugin 插件是用来将生成的 Maven 所需文件上传到 Bintray 的
+>* [android-maven-gradle-plugin](https://github.com/dcendents/android-maven-gradle-plugin)插件是用来打包 Maven 所需文件的 *注意要与gradle版本对应
+>* [gradle-bintray-plugin](https://github.com/bintray/gradle-bintray-plugin) 插件是用来将生成的 Maven 所需文件上传到 Bintray 的
 
 ### 3. 配置项目信息
 
@@ -242,6 +242,12 @@ compile 'me.xiaopan:sketch:2.0.0'
 配置的 artifactId 不一致导致的，改成一样的即可（感谢[Weizhou He
  captainbupt](https://github.com/captainbupt)发现的这个问题）
  >* `build/libs/***-javadoc.jar could not be found. build/libs/***-sources.jar could not be found. poms/pom-default.xml (No such file or directory) ` 出现这个错误说明你执行 bintrayUpload 的方式是在 Android Studio 的 Gradle 窗口中选择 "Run *** bintrayUpload"，文档中写的很清楚要在命令行中执行 gradlew bintrayUpload
+ >* `throws java.io.FileNotFoundException: …\build\poms\pom-default.xml `(系统找不到指定的路径) 
+这是在执行bintrayupload命令时报的错，该命令不生成pom-default.xml文件，需要先执行`gradlew install`命令生成。
+>* `FAILURE: Build failed with an exception.
+What went wrong: 
+Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)`
+在执行gradlew install时遇到该问题，改用`gradlew build install`
 
 ### License
     Copyright (C) 2017 Peng fei Pan <sky@panpf.me>
